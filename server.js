@@ -44,10 +44,11 @@ const yelpClientPromise = yelp.accessToken(process.env.YELP_CLIENT_ID, process.e
 
 // call yelp API using token and return JSON
 // TODO: find and plug in what information is needed for Nommad App
+// TODO: take req params to render data
 app.get('/api', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
-      term:'Chilantro',
+      term:'foodtrucks',
       location: 'austin'
     }));
   }).catch(err => {
