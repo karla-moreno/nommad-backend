@@ -10,6 +10,10 @@ require('dotenv').config();
 // setup
 const app = express();
 app.use(bodyParser.json());
+app.use((req, res, next) => {
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  next();
+});
 
 //// process.env.PORT allows heroku to set port #
 var PORT = process.env.PORT || 8080;
