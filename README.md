@@ -1,2 +1,2 @@
 # nommad-backend
-Backend server for Nommad App to access Yelp API
+Backend server for [Nommad App](https://nommad-app.firebaseapp.com/) to access Yelp API
