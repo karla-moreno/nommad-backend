@@ -21,36 +21,45 @@ app.get('/', function(req, res){
   res.send('howdy');
 })
 
+var handleClientAction = (res, promise) => {
+	promise.then(response => {
+			res.json(response.jsonBody);
+	}).catch(e => {
+			res.json(e);
+	});
+}
+
 // get access token
 // tokens can be revoked so it's best to plug in ID and secret in case
 // that occurs to keep app running
 // TODO: add these env. var. to heroku as well
-const token = yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
-  .then(response => {
+const yelpClientPromise = yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
+	.then(res => {
     console.log('token acquired');
-    return response.jsonBody.access_token;
-  }).catch(err => {
-    console.log(err);
-  });
+		return yelp.client(res.jsonBody.access_token);
+	}).catch(e => {
+		console.log(e);
+		res.status(500).send('Could not get Yelp Access Token');
+	});
 
 // call yelp API using token and return JSON
 // TODO: find and plug in what information is needed for Nommad App
-const client = yelp.client(token);
-app.get('/api', function(req, res){
-  client.search({
-    term:'Chilantro',
-    location: 'austin'
-  }).then(response => {
-    console.log(response.jsonBody.businesses[0].name);
-    var results = response.jsonBody.businesses[0].name;
+app.get('/api', (req, res) => {
+  yelpClientPromise.then(client => {
+    handleClientAction(res, client.search({
+      term:'Chilantro',
+      location: 'austin'
+    }).then(res => {
+      console.log(res.jsonBody.businesses[0].name);
+    }));
   }).catch(err => {
     console.log(err);
+    res.status(500).send('Could not get Yelp client');
   });
-  res.send(results)
 });
 
 
 //start
 app.listen(PORT, function(){
-  console.log("server listening on port 3000");
+  console.log(`server listening on ${PORT}`);
 });
