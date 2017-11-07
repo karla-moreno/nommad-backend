@@ -1,0 +1,22 @@
+{
+  "name": "nommad-backend",
+  "version": "1.0.0",
+  "description": "backend server for nommad to make yelp api calls",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/deathnaut/nommad-backend.git"
+  },
+  "author": "Karla Moreno",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/deathnaut/nommad-backend/issues"
+  },
+  "homepage": "https://github.com/deathnaut/nommad-backend#readme",
+  "dependencies": {
+    "express": "^4.16.2"
+  }
+}
