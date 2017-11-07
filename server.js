@@ -1,44 +1,54 @@
-//dependencies
+//TODO: WRITE READ ME
+//TODO: add to Nommad App readme
+
+// dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
 const yelp = require('yelp-fusion');
 require('dotenv').config();
 
-//setup
+// setup
 const app = express();
 app.use(bodyParser.json());
 
 //// process.env.PORT allows heroku to set port #
 var PORT = process.env.PORT || 8080;
 
-//get access token
-//TODO: plug in clientId and clientSecret via dotenv
-//TODO: add these env. var. to heroku as well
-// const token = yelp.accessToken(clientId, clientSecret).then(response => {
-//   console.log(response.jsonBody.access_token);
-// }).catch(e => {
-//   console.log(e);
-// });
-//
-// //
-// const client = yelp.client(token);
 
-//search using token
-// client.search({
-//   term:'Four Barrel Coffee',
-//   location: 'san francisco, ca'
-// }).then(response => {
-//   console.log(response.jsonBody.businesses[0].name);
-// }).catch(e => {
-//   console.log(e);
-// });
-
-//route
-//home page
+// routes
+// home page
 app.get('/', function(req, res){
   res.send('howdy');
 })
-//call yelp API and return JSON
+
+// get access token
+// tokens can be revoked so it's best to plug in ID and secret in case
+// that occurs to keep app running
+// TODO: add these env. var. to heroku as well
+const token = yelp.accessToken(process.env.YELP_CLIENT_ID, process.env.YELP_CLIENT_SECRET)
+  .then(response => {
+    console.log('token acquired');
+    return response.jsonBody.access_token;
+  }).catch(err => {
+    console.log(err);
+  });
+
+// call yelp API using token and return JSON
+// TODO: find and plug in what information is needed for Nommad App
+const client = yelp.client(token);
+app.get('/api', function(req, res){
+  client.search({
+    term:'Chilantro',
+    location: 'austin'
+  }).then(response => {
+    console.log(response.jsonBody.businesses[0].name);
+    var results = response.jsonBody.businesses[0].name;
+  }).catch(err => {
+    console.log(err);
+  });
+  res.send(results)
+});
+
 
 //start
 app.listen(PORT, function(){
