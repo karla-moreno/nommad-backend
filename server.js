@@ -50,7 +50,7 @@ app.get('/api', (req, res) => {
       term:'Chilantro',
       location: 'austin'
     }).then(res => {
-      console.log(res.jsonBody.businesses[0].name);
+      res.send(res.jsonBody.businesses[0].name);
     }));
   }).catch(err => {
     console.log(err);
