@@ -8,6 +8,9 @@ require('dotenv').config();
 const app = express();
 app.use(bodyParser.json());
 
+//// process.env.PORT allows heroku to set port #
+var PORT = process.env.PORT || 8080;
+
 //get access token
 //TODO: plug in clientId and clientSecret via dotenv
 //TODO: add these env. var. to heroku as well
@@ -38,6 +41,6 @@ app.get('/', function(req, res){
 //call yelp API and return JSON
 
 //start
-app.listen(3000, function(){
+app.listen(PORT, function(){
   console.log("server listening on port 3000");
 });
