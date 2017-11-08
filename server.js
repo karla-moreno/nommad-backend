@@ -67,10 +67,12 @@ app.get('/api', (req, res) => {
 
 // testing
 app.get('/test', (req, res) => {
+  let location = String(req.params);
+  console.log(location);
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
       term:'foodtrucks',
-      // location: ,
+      location: location,
       radius: 40000
     }));
   }).catch(err => {
