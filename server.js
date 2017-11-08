@@ -56,7 +56,8 @@ app.get('/api', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
       term:'foodtrucks',
-      location: 'austin'
+      location: 'austin',
+      radius: 40000
     }));
   }).catch(err => {
     console.log(err);
