@@ -67,7 +67,7 @@ app.get('/api', (req, res) => {
 
 // testing
 app.get('/test', (req, res) => {
-  let location = req.params;
+  let location = req.params.location.zip_code;
   console.log(location);
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
