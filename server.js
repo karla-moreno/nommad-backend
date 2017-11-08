@@ -66,7 +66,7 @@ app.get('/api', (req, res) => {
 });
 
 // testing
-app.get('/test', (req, res) => {
+app.get('/test/:zip', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
       term:'foodtrucks',
