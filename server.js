@@ -55,7 +55,9 @@ const yelpClientPromise = yelp.accessToken(process.env.YELP_CLIENT_ID, process.e
 app.get('/api', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
-      location: 'san francisco',
+      term:'foodtrucks',
+      location: 'austin',
+      radius: 40000
     }));
   }).catch(err => {
     console.log(err);
