@@ -66,11 +66,11 @@ app.get('/api', (req, res) => {
 });
 
 // testing
-app.get('/test/:zip', (req, res) => {
+app.get('/test', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
       term:'foodtrucks',
-      location: req.params.zip,
+      // location: ,
       radius: 40000
     }));
   }).catch(err => {
