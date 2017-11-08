@@ -66,7 +66,7 @@ app.get('/api', (req, res) => {
 });
 
 // testing
-app.get('/test', (req, res) => {
+app.get('/test/:id', (req, res) => {
   let location = String(req.params);
   console.log(location);
   yelpClientPromise.then(client => {
