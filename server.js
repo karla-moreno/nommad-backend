@@ -65,6 +65,20 @@ app.get('/api', (req, res) => {
   });
 });
 
+// testing
+app.get('/test', (req, res) => {
+  yelpClientPromise.then(client => {
+    handleClientAction(res, client.search({
+      term:'foodtrucks',
+      location: 'austin',
+      radius: 40000
+    }));
+  }).catch(err => {
+    console.log(err);
+    res.status(500).send('error retrieving data from Yelp');
+  });
+});
+
 //start
 app.listen(PORT, function(){
   console.log(`server listening on ${PORT}`);
