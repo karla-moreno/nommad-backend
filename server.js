@@ -70,7 +70,7 @@ app.get('/test', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
       term:'foodtrucks',
-      location: 'austin',
+      location: req.params.zip,
       radius: 40000
     }));
   }).catch(err => {
