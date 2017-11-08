@@ -67,7 +67,7 @@ app.get('/api', (req, res) => {
 
 // testing
 app.get('/test', (req, res) => {
-  let location = String(req.params);
+  let location = req.params;
   console.log(location);
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
