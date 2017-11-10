@@ -14,13 +14,10 @@ Back-end server for [Nommad App](https://nommad-app.firebaseapp.com/) to access 
 - [JavaScript(ES6)](http://es6-features.org/#Constants)
 - [Heroku](https://www.heroku.com)
 
-- API demo
+- API 
   - `http://nommad-backend.herokuapp.com/api/:zip`
   - This endpoint will pull information from hard-coded search parameters
     - Parameters
       - `term:'foodtrucks'`
       - `location: req.params.zip`
   - Purpose: for testing and to show what information you get back
-  
-- Live API
-  - `http://nommad-backend.herokuapp.com/search`
