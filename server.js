@@ -1,6 +1,3 @@
-//TODO: WRITE READ ME
-//TODO: add to Nommad App readme
-
 // dependencies
 const express = require('express');
 const bodyParser = require('body-parser');
@@ -27,7 +24,6 @@ app.get('/', function(req, res){
   res.send('howdy');
 })
 
-//TODO: understand what this does and comment it
 var handleClientAction = (res, promise) => {
 	promise.then(response => {
 			res.json(response.jsonBody);
@@ -50,8 +46,6 @@ const yelpClientPromise = yelp.accessToken(process.env.YELP_CLIENT_ID, process.e
 
 // JSON response route
 // call yelp API using token and return JSON
-// TODO: find and plug in what information is needed for Nommad App
-// TODO: take req params to render data
 app.get('/api/:zip', (req, res) => {
   yelpClientPromise.then(client => {
     handleClientAction(res, client.search({
